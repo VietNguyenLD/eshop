@@ -3984,3 +3984,7 @@ span.text-alert {
     font-size: 17px;
     font-weight: bold;
 }
+
+a.active.styling-edit {
+    font-size: 20px;
+}

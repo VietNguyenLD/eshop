@@ -44,31 +44,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ( $all_category_product as $key => $cate_pro)
-                    <tr>
-                        <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-                        <td>{{$cate_pro->category_name}}</td>
-                        <td><span class="text-ellipsis">
-                            <?php 
+                    @foreach( $all_category_product as $key => $cate_pro)
+                        <tr>
+                            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
+                            </td>
+                            <td>{{ $cate_pro->category_name }}</td>
+                            <td><span class="text-ellipsis">
+                                    <?php 
                                 if($cate_pro->category_status == 0){
                             ?>
-                                <a href="{{URL::to('/active-category-product/'.$cate_pro->category_id)}}"><span>Ẩn</span></a>
-                            <?php
+                                    <a
+                                        href="{{ URL::to('/active-category-product/'.$cate_pro->category_id) }}"><span>Ẩn</span></a>
+                                    <?php
                                 }elseif($cate_pro->category_status == 1){
                             ?>
-                                <a href="{{URL::to('/unactive-category-product/'.$cate_pro->category_id)}}"><span>Hiện</span></a>
-                            <?php
+                                    <a
+                                        href="{{ URL::to('/unactive-category-product/'.$cate_pro->category_id) }}"><span>Hiện</span></a>
+                                    <?php
                                 }
-                            ?>    
-                        </span></td>
-                        <td><span class="text-ellipsis">{{$cate_pro->created_at}}</span></td>
-                        <td>
-                            <a href="" class="active" ui-toggle-class=""><i
-                                    class="fa fa-pencil-square-o text-success text-active"></i><i
-                                    class="fa fa-times text-danger text"></i></a>
-                        </td>
-                    </tr>  
-                    @endforeach 
+                            ?>
+                                </span></td>
+                            <td><span class="text-ellipsis">{{ $cate_pro->created_at }}</span></td>
+                            <td>
+                            <a href="{{URL::to('/edit-category-product/'.$cate_pro->category_id)}}" class="active styling-edit" ui-toggle-class=""><i
+                                        class="fa fa-pencil-square-o text-success text-active"></i></a>
+                                <a href="{{URL::to('/delete-category-product/'.$cate_pro->category_id)}}" class="active styling-edit" 
+                                    onclick="return confirm('Bạn có chắc muốn xoá danh mục?')" ui-toggle-class=""><i
+                                        class="fa fa-times text-danger text"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
