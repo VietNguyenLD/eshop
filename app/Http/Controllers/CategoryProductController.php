@@ -51,4 +51,29 @@ class CategoryProductController extends Controller
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->delete(); 
         return Redirect::to('/all-category-product')->with('success','Xoá mục danh mục thành công');
     }
+
+    // AND FUNCTION ADMIN PAGE
+
+
+
+    public function show_category_home( $category_product_id){
+        $category_product = DB::table('tbl_category_product')->where('category_status','1')
+        ->orderby('category_id','desc')->get();
+
+        $brand_product = DB::table('tbl_brand_product')->where('brand_status','1')
+        ->orderby('brand_id','desc')->get();
+
+        $category_by_id = DB::table('tbl_product')
+        ->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
+        ->where('tbl_product.category_id',$category_product_id)->get();
+
+        $category_name = DB::table('tbl_category_product')->where('tbl_category_product.category_id',$category_product_id)
+        ->limit(1)->get();
+
+
+        return view('pages.category.show_category')->with('category_product',$category_product)
+        ->with('brand_product',$brand_product)
+        ->with('category_by_id',$category_by_id)
+        ->with('category_name',$category_name);
+    }
 }
