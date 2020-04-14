@@ -76,7 +76,7 @@
         </div>
 
         <div class="tab-pane fade" id="companyprofile">
-            <p>{!!$detail_pro->product_content!!}</p>
+            <p>{!!$detail_pro->product_desc!!}</p>
         </div>
 
 
@@ -113,19 +113,22 @@
 @endforeach
 <div class="recommended_items">
     <!--recommended_items-->
-    <h2 class="title text-center">Sản phẩm gợi ý</h2>
-
+    <h2 class="title text-center">Sản phẩm liên quan</h2>
+    
+        
     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="item active">
+                @foreach ($related_cate_product as $key => $related_pro )
+                <a href="{{URL::to('/chi-tiet-san-pham/'.$related_pro->product_id)}}">
                 <div class="col-sm-4">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
-                                <img src="{{ asset('public/uploads/product/57.webp')}}"
+                                <img src="{{ asset('public/uploads/product/'.$related_pro->product_image)}}"
                                 alt="" style="height:200px"/>
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
+                                <h2>{{number_format($related_pro->product_price).' VNĐ'}}</h2>
+                                <p>{{$related_pro->product_name}}</p>
                                 <button type="button" class="btn btn-default add-to-cart"><i
                                         class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
                             </div>
@@ -133,48 +136,20 @@
                     </div>
                     
                 </div>
-                <div class="col-sm-4">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{ asset('public/uploads/product/57.webp')}}"
-                                alt="" style="height:200px"/>
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <button type="button" class="btn btn-default add-to-cart"><i
-                                        class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-sm-4">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{ asset('public/uploads/product/57.webp')}}"
-                                alt="" style="height:200px"/>
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <button type="button" class="btn btn-default add-to-cart"><i
-                                        class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-                
+                </a>
+                @endforeach
             </div>
             <div class="item">
+                @foreach ($related_brand_product as $key => $related_brand )
+                <a href="{{URL::to('/chi-tiet-san-pham/'.$related_brand->product_id)}}">
                 <div class="col-sm-4">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
-                                <img src="{{ asset('public/uploads/product/57.webp')}}"
+                                <img src="{{ asset('public/uploads/product/'.$related_brand->product_image)}}"
                                 alt="" style="height:200px"/>
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
+                                <h2>{{number_format($related_brand->product_price).' VNĐ'}}</h2>
+                                <p>{{$related_brand->product_name}}</p>
                                 <button type="button" class="btn btn-default add-to-cart"><i
                                         class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
                             </div>
@@ -182,36 +157,8 @@
                     </div>
                     
                 </div>
-                <div class="col-sm-4">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{ asset('public/uploads/product/57.webp')}}"
-                                alt="" style="height:200px"/>
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <button type="button" class="btn btn-default add-to-cart"><i
-                                        class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-sm-4">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{ asset('public/uploads/product/57.webp')}}"
-                                alt="" style="height:200px"/>
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <button type="button" class="btn btn-default add-to-cart"><i
-                                        class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+                </a>
+                @endforeach
             </div>
             
         </div>
@@ -222,6 +169,7 @@
             <i class="fa fa-angle-right"></i>
         </a>
     </div>
+   
 </div>
 <!--/recommended_items-->
 

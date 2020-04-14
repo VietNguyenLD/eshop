@@ -37,10 +37,9 @@ class ProductController extends Controller
     
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
-            $doc = 'v.';
             // current lay dau - explode phan tach chuoi
             $name_image = current(explode('.',$get_name_image));
-            $new_image = $name_image.rand(0,99).$doc.$get_image->getClientOriginalExtension();
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
             $get_image->move('public/uploads/product', $new_image);
             $data['product_image'] = $new_image;
 
@@ -108,7 +107,29 @@ class ProductController extends Controller
         ->join('tbl_brand_product','tbl_brand_product.brand_id','tbl_product.brand_id')
         ->where('tbl_product.product_id',$product_id)->get();
 
+        //SP LIEN QUAN
+        foreach($detail_product as $value){
+            $category_id = $value->category_id;
+        }
+        $related_cate_product = DB::table('tbl_product')
+        ->join('tbl_category_product','tbl_category_product.category_id','tbl_product.category_id')
+        ->join('tbl_brand_product','tbl_brand_product.brand_id','tbl_product.brand_id')
+        ->where('tbl_product.category_id',$category_id)
+        ->whereNotIn('tbl_product.product_id',[$product_id])->limit(3)->get();
+        //  ->whereNotIn('tbl_product.product_id',[$product_id])
+        // tru sp do
+        foreach($detail_product as $value){
+            $brand_id = $value->brand_id;
+        }
+        $related_brand_product = DB::table('tbl_product')
+        ->join('tbl_category_product','tbl_category_product.category_id','tbl_product.category_id')
+        ->join('tbl_brand_product','tbl_brand_product.brand_id','tbl_product.brand_id')
+        ->where('tbl_product.brand_id',$brand_id)
+        ->whereNotIn('tbl_product.product_id',[$product_id])->limit(3)->get();
+
         return view('pages.product.show_detail')->with('detail_product',$detail_product)
+        ->with('related_cate_product',$related_cate_product)
+        ->with('related_brand_product',$related_brand_product)
         ->with('category_product',$category_product)
         ->with('brand_product',$brand_product);
     }
