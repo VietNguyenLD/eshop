@@ -37,9 +37,10 @@ class ProductController extends Controller
     
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
+            $doc = 'v.';
             // current lay dau - explode phan tach chuoi
             $name_image = current(explode('.',$get_name_image));
-            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $new_image = $name_image.rand(0,99).$doc.$get_image->getClientOriginalExtension();
             $get_image->move('public/uploads/product', $new_image);
             $data['product_image'] = $new_image;
 
@@ -92,4 +93,24 @@ class ProductController extends Controller
         DB::table('tbl_product')->where('product_id',$product_id)->delete(); 
         return Redirect::to('/all-product')->with('success','Xoá mục sản phẩm thành công');
     }
+
+    //END PRODUCT ADMIN
+
+    public function detail_product($product_id){
+        $category_product = DB::table('tbl_category_product')->where('category_status','1')
+        ->orderby('category_id','desc')->get();
+
+        $brand_product = DB::table('tbl_brand_product')->where('brand_status','1')
+        ->orderby('brand_id','desc')->get();
+
+        $detail_product = DB::table('tbl_product')
+        ->join('tbl_category_product','tbl_category_product.category_id','tbl_product.category_id')
+        ->join('tbl_brand_product','tbl_brand_product.brand_id','tbl_product.brand_id')
+        ->where('tbl_product.product_id',$product_id)->get();
+
+        return view('pages.product.show_detail')->with('detail_product',$detail_product)
+        ->with('category_product',$category_product)
+        ->with('brand_product',$brand_product);
+    }
+
 }

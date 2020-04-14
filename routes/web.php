@@ -18,6 +18,7 @@ Route::get('/trang-chu', 'HomeController@index');
 // Category Product Home
 Route::get('/danh-muc-san-pham/{category_product_id}', 'CategoryProductController@show_category_home');
 Route::get('/thuong-hieu-san-pham/{brand_product_id}', 'BrandProductController@show_brand_home');
+Route::get('/chi-tiet-san-pham/{product_id}', 'ProductController@detail_product');
 
 
 //backend
