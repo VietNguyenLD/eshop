@@ -12,16 +12,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Frontend
+////////////FRONT-END /////////////
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
+
 // Category Product Home
 Route::get('/danh-muc-san-pham/{category_product_id}', 'CategoryProductController@show_category_home');
 Route::get('/thuong-hieu-san-pham/{brand_product_id}', 'BrandProductController@show_brand_home');
 Route::get('/chi-tiet-san-pham/{product_id}', 'ProductController@detail_product');
+// CARD
+
+Route::get('/show-cart','CartController@show_cart');
+Route::get('/delete-cart/{rowId}','CartController@delete_cart');
+Route::post('/save-cart','CartController@save_cart');
+Route::post('/update-cart-quantity','CartController@update_cart_quantity');
 
 
-//backend
+////////////BACK-END /////////////
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin-dashboard', 'AdminController@show_dashboard');
 Route::get('/logout', 'AdminController@admin_logout');
