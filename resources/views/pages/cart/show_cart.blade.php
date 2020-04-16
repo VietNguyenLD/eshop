@@ -68,8 +68,8 @@
 <section id="do_action">
     <div class="container-fluid">
         <div class="heading">
-            <h3>What would you like to do next?</h3>
-            <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+            <h3>Cám ơn bạn đã mua hàng tai SHOP</h3>
+            <p>Chúc bạn mua hàng vui vẻ - Mong bạn sẽ tiếp tục mua hàng =))</p>
         </div>
         <div class="row">
             <div class="col-sm-6">               	
@@ -84,8 +84,8 @@
                         <li>Phí vận chuyển <span>Free</span></li>
                         <li>Thành tiền <span>{{Cart::total().' '.'VNĐ'}}</span></li>
                     </ul>
-                        <a class="btn btn-default update" href="">Update</a>
-                        <a class="btn btn-default check_out" href="">Check Out</a>
+                        
+                        <a class="btn btn-default check_out" href="{{URL::to('/login-checkout')}}">Thanh toán</a>
                 </div>
             </div>
         </div>

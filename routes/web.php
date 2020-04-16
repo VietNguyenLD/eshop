@@ -20,12 +20,17 @@ Route::get('/trang-chu', 'HomeController@index');
 Route::get('/danh-muc-san-pham/{category_product_id}', 'CategoryProductController@show_category_home');
 Route::get('/thuong-hieu-san-pham/{brand_product_id}', 'BrandProductController@show_brand_home');
 Route::get('/chi-tiet-san-pham/{product_id}', 'ProductController@detail_product');
-// CARD
 
+// CARD
 Route::get('/show-cart','CartController@show_cart');
 Route::get('/delete-cart/{rowId}','CartController@delete_cart');
 Route::post('/save-cart','CartController@save_cart');
 Route::post('/update-cart-quantity','CartController@update_cart_quantity');
+
+//CHECK OUT
+Route::get('/login-checkout','CheckoutController@login_checkout');
+Route::post('/add-customer','CheckoutController@add_customer');
+Route::get('/checkout','CheckoutController@checkout');
 
 
 ////////////BACK-END /////////////
