@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 ////////////FRONT-END /////////////
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
+Route::get('/tim-kiem', 'HomeController@search_product');
 
 // Category Product Home
 Route::get('/danh-muc-san-pham/{category_product_id}', 'CategoryProductController@show_category_home');
@@ -31,7 +32,9 @@ Route::post('/update-cart-quantity','CartController@update_cart_quantity');
 Route::get('/login-checkout','CheckoutController@login_checkout');
 Route::get('/logout-checkout','CheckoutController@logout_checkout');
 Route::get('/checkout','CheckoutController@show_checkout');
+Route::get('/payment','CheckoutController@payment');
 Route::post('/add-customer','CheckoutController@add_customer');
+Route::post('/order-place','CheckoutController@order_place');
 Route::post('/save-checkout-customer','CheckoutController@save_checkout_customer');
 Route::post('/login-customer','CheckoutController@login_customer');
 
