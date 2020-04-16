@@ -39,7 +39,7 @@
                         </th>
                         <th>Tên sản phẩm</th>
                         <th>Giá</th>
-                        <th>Hình ảnh sản phẩm</th>
+                        <th>Hình ảnh </th>
                         <th>Danh mục</th>
                         <th>Thương hiệu</th>
                         <th>Hiển thị</th>
@@ -70,7 +70,7 @@
                                 }
                             ?>
                                 </span></td>
-                            <td><span class="text-ellipsis">{{ $pro->created_at }}</span></td>
+                            
                             <td>
                             <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class=""><i
                                         class="fa fa-pencil-square-o text-success text-active"></i></a>
@@ -87,7 +87,6 @@
             <div class="row">
 
                 <div class="col-sm-5 text-center">
-                    <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
                 </div>
                 <div class="col-sm-7 text-right text-center-xs">
                     <ul class="pagination pagination-sm m-t-none m-b-none">

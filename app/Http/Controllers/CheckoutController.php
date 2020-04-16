@@ -122,7 +122,14 @@ class CheckoutController extends Controller
         if($data_payment['payment_method'] == 1){
             echo 'Thanh toan bang the ATM';
         }elseif($data_payment['payment_method'] == 2){
-            echo 'Thanh toan bang tien mat';
+            $category_product = DB::table('tbl_category_product')->where('category_status','1')
+            ->orderby('category_id','desc')->get();
+    
+            $brand_product = DB::table('tbl_brand_product')->where('brand_status','1')
+            ->orderby('brand_id','desc')->get();
+            Cart::destroy();
+            return view('checkout.handcash')->with('category_product',$category_product)
+            ->with('brand_product',$brand_product);
         }else{
             echo 'Thanh toan bang the ghi no';
         }

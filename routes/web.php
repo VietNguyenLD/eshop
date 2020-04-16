@@ -80,3 +80,6 @@ Route::get('/unactive-product/{product_id}', 'ProductController@unactive_product
 
 Route::post('/save-product', 'ProductController@save_product');
 Route::post('/update-product/{product_id}', 'ProductController@update_product');
+//Order
+Route::get('/manager-order','OrderManagerController@index');
+Route::get('/view-order/{order_id}','OrderManagerController@view_order');
