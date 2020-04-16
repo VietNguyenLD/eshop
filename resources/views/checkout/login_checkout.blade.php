@@ -6,9 +6,10 @@
             <div class="col-sm-4 col-sm-offset-1">
                 <div class="login-form"><!--login form-->
                     <h2>Đăng nhập tài khoản</h2>
-                    <form action="#">
-                        <input type="text" placeholder="Nhập email" name="email_account" />
-                        <input type="password" placeholder="Nhập mật khẩu" name="password_account"/>
+                    <form action="{{URL::to('/login-customer')}}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="text" placeholder="Nhập email" name="email_customer" />
+                        <input type="password" placeholder="Nhập mật khẩu" name="password_customer"/>
                         <span>
                             <input type="checkbox" class="checkbox"> 
                             Ghi nhớ đăng nhập 
