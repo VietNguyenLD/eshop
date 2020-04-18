@@ -32,12 +32,12 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả sản phẩm</label>
-                            <textarea class="form-control" style="resize: none" rows="7" id="exampleInputPassword1" 
+                            <textarea class="form-control" style="resize: none" rows="7" id="ckeditor1" 
                              name="product_desc" placeholder="Mô tả sản phẩm">{{$pro->product_desc}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nội dung sản phẩm</label>
-                            <textarea class="form-control" style="resize: none" rows="7" id="exampleInputPassword1" 
+                            <textarea class="form-control" style="resize: none" rows="7" id="ckeditor2" 
                              name="product_content" placeholder="Nội dung sản phẩm">{{$pro->product_content}}</textarea>
                         </div>
                         <div class="form-group">
