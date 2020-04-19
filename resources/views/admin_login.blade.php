@@ -38,15 +38,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			}
 		?>
         <form action="{{URL::to('admin_dashboard')}}" method="post">
-            {{ csrf_field() }}
-			<input type="email"  class="ggg" name="admin_email" placeholder="E-MAIL" required="">
-			<input type="password" class="ggg" name="admin_password" placeholder="PASSWORD" required="">
+			{{ csrf_field() }}
+			@foreach ($errors->all() as $val )
+				{{ $val }}
+			@endforeach
+			<input type="email"  class="ggg" name="admin_email" placeholder="E-MAIL">
+			<input type="password" class="ggg" name="admin_password" placeholder="PASSWORD">
 			<span><input type="checkbox" />Ghi nhớ</span>
 			<h6><a href="#">Quên mật khẩu ?</a></h6>
-				<div class="clearfix"></div>
-				<input type="submit" value="Sign In" name="login">
+			<input type="submit" value="Sign In" name="login">
+			<div class="g-recaptcha captcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
+				<br/>
+			@if($errors->has('g-recaptcha-response'))
+			<span class="invalid-feedback" style="display:block">
+				
+			</span>
+			@endif
+				
 		</form>
-		<p>Chưa có tài khoản ?<a href="registration.html">Tạo tài khoản</a></p>
+		<a href="{{URl::to('/login-facebook')}}">Đăng nhập bằng Facebook</a>
 </div>
 </div>
 <script src="{{ asset('backend/js/bootstrap.js')}}"></script>
@@ -56,6 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{ asset('backend/js/jquery.nicescroll.js')}}"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="{{ asset('backend/js/jquery.scrollTo.js')}}"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
 </body>

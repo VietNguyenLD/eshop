@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 Route::get('/tim-kiem', 'HomeController@search_product');
+///Mail///
+Route::get('/send-mail', 'MailController@send_mail');
 
 // Category Product Home
 Route::get('/danh-muc-san-pham/{category_product_id}', 'CategoryProductController@show_category_home');
@@ -83,3 +85,7 @@ Route::post('/update-product/{product_id}', 'ProductController@update_product');
 //Order
 Route::get('/manager-order','OrderManagerController@index');
 Route::get('/view-order/{order_id}','OrderManagerController@view_order');
+
+//login Facebook
+Route::get('/login-facebook','AdminController@login_facebook');
+Route::get('/admin/callback','AdminController@callback_facebook');

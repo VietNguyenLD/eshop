@@ -89,7 +89,6 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
                                 <?php
                                     $customer_id = Session::get('customer_id');
                                     $shipping_id = Session::get('shipping_id');
@@ -313,6 +312,7 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0">
     </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script> 
 </body>
 
 </html>

@@ -29,5 +29,11 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'facebook' => [
+        'client_id' => '690326201724531',  //client face của bạn
+        'client_secret' => '50217222acac38731dafd4786afe25dc',  //client app service face của bạn
+        'redirect' => 'http://banhang.abc/admin/callback' //callback trả về
+    ],
+
 
 ];
