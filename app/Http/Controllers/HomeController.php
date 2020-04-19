@@ -7,7 +7,15 @@ use DB;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        //Seo
+        $meta_desc = "Chuyên bán linh kiện phụ kiện PC-Laptop";
+        $meta_keywords = "Phụ kiện - Linh kiện - Pc - Laptop";
+        $meta_tile = "Các dòng máy hót hiện tại";
+        $url_canonical = $request->url();
+        //End - Seo
+
+
         $category_product = DB::table('tbl_category_product')->where('category_status','1')
         ->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand_product')->where('brand_status','1')
@@ -18,9 +26,10 @@ class HomeController extends Controller
             $product_id[] = $value->product_id;
         }
        
-        
-        return view('pages.home')->with('category_product',$category_product)->with('brand_product',$brand_product)
-        ->with('all_product',$all_product);
+        return view('pages.home')->with(compact('category_product','brand_product','all_product',
+        'meta_desc','meta_keywords','meta_tile','url_canonical'));
+        // return view('pages.home')->with('category_product',$category_product)->with('brand_product',$brand_product)
+        // ->with('all_product',$all_product);
     }
     public function search_product(Request $request){
         $keywords = $request->input('keywords_submit');

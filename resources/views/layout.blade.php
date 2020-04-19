@@ -4,9 +4,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <!--- Seo ---->
+    <meta name="description" content="Cửa hàng Linh kiện phụ kiện máy tính laptop">
+    <meta name="keywords" content="Laptop PC">
+    <meta name="robots" content="INDEX.FOLLOW">
+    <link rel="canonical" href="http://banhang.abc/">
     <meta name="author" content="">
-    <title>Home | E-Shopper</title>
+    <link rel="icon" type="image/x-icon" href="">
+    <!--- Seo  --->
+    <meta property="og:url" content="http://banhang.abc/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Shop IT - Chuyễn các loại máy tính" />
+    <meta property="og:description" content="Cửa hàng Linh kiện phụ kiện máy tính laptop" />
+    <meta property="og:image"         content="{{asset('frontend/images/product-details/rating.png')}}" />
+
+    <!-- -->
+    <title>Shop IT - Chuyễn các loại máy tính</title>
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/prettyPhoto.css') }}" rel="stylesheet">
@@ -48,7 +61,8 @@
                     <div class="col-sm-6">
                         <div class="social-icons pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="https://www.facebook.com/viet.jonny.14/"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://www.facebook.com/viet.jonny.14/"><i class="fa fa-facebook"></i></a>
+                                </li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
@@ -67,7 +81,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                        <a href="{{URL::to('/trang-chu')}}"><img
+                            <a href="{{ URL::to('/trang-chu') }}"><img
                                     src="{{ asset('frontend/images/home/logo.png') }}"
                                     alt="" /></a>
                         </div>
@@ -81,23 +95,28 @@
                                     $shipping_id = Session::get('shipping_id');
                                     if($customer_id != NULL && $shipping_id!= NULL){
                                 ?>
-                                <li><a href="{{URL::to('/payment')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
+                                <li><a href="{{ URL::to('/payment') }}"><i
+                                            class="fa fa-crosshairs"></i> Thanh toán</a></li>
                                 <?php
                                     }else{
                                 ?>
-                                <li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
-                                <?php } ?>  
-                                <li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                                <li><a href="{{ URL::to('/login-checkout') }}"><i
+                                            class="fa fa-crosshairs"></i> Thanh toán</a></li>
+                                <?php } ?>
+                                <li><a href="{{ URL::to('/show-cart') }}"><i
+                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                                 <?php
                                     $customer_id = Session::get('customer_id');
                                     if($customer_id){
                                 ?>
-                                <li><a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Đăng Xuất</a></li>
+                                <li><a href="{{ URL::to('/logout-checkout') }}"><i
+                                            class="fa fa-lock"></i> Đăng Xuất</a></li>
                                 <?php
                                     }else{
                                 ?>
-                                <li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
-                                <?php } ?>        
+                                <li><a href="{{ URL::to('/login-checkout') }}"><i
+                                            class="fa fa-lock"></i> Đăng nhập</a></li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>
@@ -122,14 +141,15 @@
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="{{URL::to('/trang-chu')}}" class="active">Trang Chủ</a></li>
+                                <li><a href="{{ URL::to('/trang-chu') }}" class="active">Trang
+                                        Chủ</a></li>
                                 <li class="dropdown"><a href="#">Sản Phẩm<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html"></a></li>
-                                    </ul> 
+                                    </ul>
                                 </li>
                                 <li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
-                        
+
                                 </li>
                                 <li><a href="404.html">Giỏ hàng</a></li>
                                 <li><a href="contact-us.html">Liên hệ</a></li>
@@ -137,13 +157,14 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <form action="{{URL::to('/tim-kiem')}}" method="GET">
+                        <form action="{{ URL::to('/tim-kiem') }}" method="GET">
                             {{-- {{ csrf_field() }} --}}
                             <div class="search_box pull-right">
-                                <input type="text"  name="keywords_submit" placeholder="Nhập tên sản phẩm" />
-                                <input type="submit" name="search_items" value="Tìm kiếm" class="btn btn-primary btn-sm">
+                                <input type="text" name="keywords_submit" placeholder="Nhập tên sản phẩm" />
+                                <input type="submit" name="search_items" value="Tìm kiếm"
+                                    class="btn btn-primary btn-sm">
                             </div>
-        
+
                         </form>
                     </div>
                 </div>
@@ -171,7 +192,7 @@
                                     <h1><span>IT</span>-SHOP</h1>
                                     <h2>Chào mừng đến với IT-SHOP</h2>
                                     <p>Cam kết hàng chính hãng - Hệ thống chăm sóc khách hàng ưu việt </p>
-                                    
+
                                 </div>
                                 <div class="col-sm-6">
                                     <img src="{{ asset('public/uploads/product/mac-201923.jpg') }}"
@@ -183,11 +204,11 @@
                                     <h1><span>IT</span>-SHOP</h1>
                                     <h2>Chào mừng đến với IT-SHOP</h2>
                                     <p>Cam kết hàng chính hãng - Hệ thống chăm sóc khách hàng ưu việt </p>
-                                    
+
                                 </div>
                                 <div class="col-sm-6">
                                     <img src="{{ asset('public/uploads/product/lenovo80v.jpg') }}"
-                                        class="girl img-responsive" alt="" height="400px"/>
+                                        class="girl img-responsive" alt="" height="400px" />
                                 </div>
                             </div>
 
@@ -196,12 +217,12 @@
                                     <h1><span>IT</span>-SHOP</h1>
                                     <h2>Chào mừng đến với IT-SHOP</h2>
                                     <p>Cam kết hàng chính hãng - Hệ thống chăm sóc khách hàng ưu việt </p>
-                                    
-                                </div>  
+
+                                </div>
                                 <div class="col-sm-6">
                                     <img src="{{ asset('public/uploads/product/dell86.jpg') }}"
                                         class="girl img-responsive" alt="" height="400px" />
-                                    
+
                                 </div>
                             </div>
 
@@ -229,12 +250,14 @@
                         <h2>Danh mục sản phẩm</h2>
                         <div class="panel-group category-products" id="accordian">
                             <!--category-productsr-->
-                            @foreach ($category_product as $key => $cate_product )
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="{{URL::to('/danh-muc-san-pham/'.$cate_product->category_id)}}">{{$cate_product->category_name}}</a></h4>
+                            @foreach($category_product as $key => $cate_product )
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a
+                                                href="{{ URL::to('/danh-muc-san-pham/'.$cate_product->category_id) }}">{{ $cate_product->category_name }}</a>
+                                        </h4>
+                                    </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                         <!--/category-products-->
@@ -243,28 +266,32 @@
                             <!--brands_products-->
                             <h2>Thương hiệu sản phẩm</h2>
                             <div class="brands-name">
-                                @foreach ($brand_product as $key=>$brand_pro)
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand_pro->brand_id)}}"> <span class="pull-right">10</span>{{$brand_pro->brand_name}}</a></li>
-                                </ul>
+                                @foreach($brand_product as $key=>$brand_pro)
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a
+                                                href="{{ URL::to('/thuong-hieu-san-pham/'.$brand_pro->brand_id) }}">
+                                                <span class="pull-right">10</span>{{ $brand_pro->brand_name }}</a>
+                                        </li>
+                                    </ul>
                                 @endforeach
                             </div>
                         </div>
                         <!--/brands_products-->
-
+                        
                     </div>
                 </div>
 
                 <div class="col-sm-9 padding-right">
-					@yield('content')
+                    @yield('content')
                 </div>
             </div>
         </div>
+        
     </section>
 
     <footer id="footer">
         <!--Footer-->
-        
+
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
@@ -277,15 +304,15 @@
 
     </footer>
     <!--/Footer-->
-
-
-
     <script src="{{ asset('frontend/js/jquery.js') }}"></script>
     <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.scrollUp.min.js') }}"></script>
     <script src="{{ asset('frontend/js/price-range.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0">
+    </script>
 </body>
 
 </html>

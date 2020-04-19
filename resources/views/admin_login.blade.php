@@ -39,7 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		?>
         <form action="{{URL::to('admin_dashboard')}}" method="post">
             {{ csrf_field() }}
-			<input type="email" class="ggg" name="admin_email" placeholder="E-MAIL" required="">
+			<input type="email"  class="ggg" name="admin_email" placeholder="E-MAIL" required="">
 			<input type="password" class="ggg" name="admin_password" placeholder="PASSWORD" required="">
 			<span><input type="checkbox" />Ghi nhớ</span>
 			<h6><a href="#">Quên mật khẩu ?</a></h6>
@@ -56,5 +56,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{ asset('backend/js/jquery.nicescroll.js')}}"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="{{ asset('backend/js/jquery.scrollTo.js')}}"></script>
+
+
 </body>
 </html>
