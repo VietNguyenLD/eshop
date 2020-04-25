@@ -12,6 +12,11 @@ session_start();
 
 class CartController extends Controller
 {
+    public function add_cart_ajax(Request $request){
+        $data = $request->all();
+        $session_id = substr(md5(microtime()),rand(0,26),5);
+        $cart = Session::get('cart');
+    }
     public function show_cart(){
         $category_product = DB::table('tbl_category_product')->where('category_status','1')
         ->orderby('category_id','desc')->get();
