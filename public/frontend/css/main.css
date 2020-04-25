@@ -2453,3 +2453,6 @@ input.btn.btn-primary.btn-sm {
 img.girl.img-responsive {
     height: 400px;
 }
+.btn .btn-default .btn-sm{
+    background: #FE980F;
+}

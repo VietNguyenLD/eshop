@@ -31,7 +31,7 @@ Route::post('/save-cart','CartController@save_cart');
 Route::post('/update-cart-quantity','CartController@update_cart_quantity');
 
 Route::post('/add-cart-ajax','CartController@add_cart_ajax');
-
+Route::get('/gio-hang','CartController@gio_hang');
 //CHECK OUT
 Route::get('/login-checkout','CheckoutController@login_checkout');
 Route::get('/logout-checkout','CheckoutController@logout_checkout');

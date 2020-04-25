@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Shop IT - Chuyễn các loại máy tính" />
     <meta property="og:description" content="Cửa hàng Linh kiện phụ kiện máy tính laptop" />
-    <meta property="og:image"         content="{{asset('frontend/images/product-details/rating.png')}}" />
+    <meta property="og:image" content="{{asset('frontend/images/product-details/rating.png')}}" />
 
     <!-- -->
     <title>Shop IT - Chuyễn các loại máy tính</title>
@@ -103,7 +103,9 @@
                                 <li><a href="{{ URL::to('/login-checkout') }}"><i
                                             class="fa fa-crosshairs"></i> Thanh toán</a></li>
                                 <?php } ?>
-                                <li><a href="{{ URL::to('/show-cart') }}"><i
+                                {{-- <li><a href="{{ URL::to('/show-cart') }}"><i
+                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li> --}}
+                                <li><a href="{{ URL::to('/gio-hang') }}"><i
                                             class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                                 <?php
                                     $customer_id = Session::get('customer_id');
@@ -145,14 +147,15 @@
                                         Chủ</a></li>
                                 <li class="dropdown"><a href="#">Sản Phẩm<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html"></a></li>
+                                        @foreach ($brand_product as $key=>$brand_pro )
+                                        <li><a
+                                            href="{{ URL::to('/thuong-hieu-san-pham/'.$brand_pro->brand_id) }}">
+                                            <span class="pull-right"></span>{{ $brand_pro->brand_name }}</a>
+                                        </li>
+                                        @endforeach
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
-
-                                </li>
-                                <li><a href="404.html">Giỏ hàng</a></li>
-                                <li><a href="contact-us.html">Liên hệ</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -336,15 +339,19 @@
                         cart_product_qty:cart_product_qty,
                         _token:_token},
                     success:function(){
-
                         swal({
-                                
+                                title: "Đã thêm sản phẩm vào giỏ hàng",
+                                text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                showCancelButton: true,
+                                cancelButtonText: "Xem tiếp",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Đi đến giỏ hàng",
+                                closeOnConfirm: false
                             },
                             function() {
                                 window.location.href = "{{url('/gio-hang')}}";
                             });
-
-                    }
+                        }
 
                 });
             });
