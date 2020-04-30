@@ -29,9 +29,16 @@ Route::get('/show-cart','CartController@show_cart');
 Route::get('/delete-cart/{rowId}','CartController@delete_cart');
 Route::post('/save-cart','CartController@save_cart');
 Route::post('/update-cart-quantity','CartController@update_cart_quantity');
-
+  ///ajax-cart///
 Route::post('/add-cart-ajax','CartController@add_cart_ajax');
 Route::get('/gio-hang','CartController@gio_hang');
+Route::get('/delete-sp/{session_id}','CartController@delete_sp_ajax');
+Route::get('/delete-all-product-cart','CartController@delete_all_product_cart');
+Route::post('/update-cart','CartController@update_cart');
+  ////Coupon////
+Route::post('/check-coupon','CartController@check_coupon');
+
+
 //CHECK OUT
 Route::get('/login-checkout','CheckoutController@login_checkout');
 Route::get('/logout-checkout','CheckoutController@logout_checkout');

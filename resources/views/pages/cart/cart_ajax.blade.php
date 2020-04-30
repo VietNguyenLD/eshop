@@ -10,30 +10,37 @@
             </ol>
         </div>
         <div class="table-responsive cart_info">
-            <table class="table table-condensed">
-                <thead>
-                    <tr class="cart_menu">
-                        <td class="image">Hình ảnh</td>
-                        <td class="description">Tên sản phẩm</td>
-                        <td class="price">Giá sản phẩm</td>
-                        <td class="quantity">Số lượng</td>
-                        <td class="total">Thành tiền</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                            $total = 0;
-                    @endphp
-                    @foreach(Session::get('cart') as $key => $value )
+            @include('flash-message')
+            <form action="{{URL::to('/update-cart')}}" method="post">
+                @csrf
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Hình ảnh</td>
+                            <td class="description">Tên sản phẩm</td>
+                            <td class="price">Giá sản phẩm</td>
+                            <td class="quantity">Số lượng</td>
+                            <td class="total">Thành tiền</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
                         @php
-                            $subtotal = $value['product_price'] * $value['product_qty'];
-                            $total+=$subtotal;
+                        $total = 0;
+                        $tax = 0;
+                        @endphp
+                        @if(Session::get('cart') == true)
+                        @foreach(Session::get('cart') as $key => $value )
+                        @php
+                        $subtotal = $value['product_price'] * $value['product_qty'];
+                        $total+=$subtotal;
+                        $tax = 0.08*$total;
                         @endphp
                         <tr>
                             <td class="cart_product">
-                                <img src="{{asset('public/uploads/product/'.$value['product_image'])}}" alt="{{$value['product_name']}}"
-                                style="width: 80px;">
+                                <img src="{{asset('public/uploads/product/'.$value['product_image'])}}"
+                                    alt="{{$value['product_name']}}" style="width: 80px;">
                             </td>
                             <td class="cart_description">
                                 <h4><a href="">{{$value['product_name']}}</h4>
@@ -45,14 +52,9 @@
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
-                                    <form action=""
-                                        method="post">
-                                        
-                                        <input class="cart_quantity_input" style="width: 40px" type="number"
-                                            name="cart_quantity" min="1" value="{{$value['product_qty']}}">
-                                        <input type="submit" value="Cập nhật" name="update_qty"
-                                            class="btn btn-default btn-sm">
-                                    </form>
+                                    <input class="cart_quantity_input" style="width: 40px" type="number"
+                                        name="cart_qty[{{$value['session_id']}}]" min="1"
+                                        value="{{$value['product_qty']}}">
                                 </div>
                             </td>
                             <td class="cart_total">
@@ -62,13 +64,28 @@
                             </td>
                             <td class="cart_delete">
                                 <a class="cart_quantity_delete"
-                                    href=""><i
+                                    href="{{URL::to('/delete-sp/'.$value['session_id'])}}"><i
                                         class="fa fa-times"></i></a>
                             </td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        @endforeach
+                        @endif
+                        @if(Session::get('cart') == true)
+                        <tr>
+                            <td><input type="submit" value="Cập nhật" name="update_qty"
+                                    class="btn btn-default check_out"></td>
+                        </tr>
+                        @else
+                        <tr colspan="5"><center>
+                            <td>
+                                <span>Làm ơn thêm sản phẩm vào giỏ hàng</span>
+                            </td>
+                        </center></tr>
+                        @endif
+                    </tbody>
+                </table>
+
+            </form>
         </div>
     </div>
 </section>
@@ -81,29 +98,38 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <iframe width="440" height="284" src="https://www.youtube.com/embed/l-g3XOyl4T0" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-            </div>
+                <div class="total_area">
+                    <form action="{{url('/check-coupon')}}" method="POST">
+                        @csrf
+                        <input type="text" class="form-control code-coupon" name="coupon" placeholder="Nhập mã giảm giá">
+                        <input type="submit" class="btn btn-default check_out" name="check_coupon" value="Tính mã giảm giá"> 
+                    </form>
+                </div>
+                
+            </div>        
             <div class="col-sm-6">
                 <div class="total_area">
                     <ul>
                         <li>Tổng
-                            <span></span>
+                            <span>{{number_format($total,0,',','.').' VNĐ'}}</span>
                         </li>
                         <li>Thuế
-                            <span></span>
+                            <span>{{number_format($tax,0,',','.').' VNĐ'}}</span>
                         </li>
                         <li>Phí vận chuyển <span>Free</span></li>
                         <li>Tiền sau giảm
                             <span></span>
                         </li>
                     </ul>
-                    
-                    <a class="btn btn-default check_out" href="{{ URL::to('/checkout') }}">Thanh toán</a>
-                    
-                    <a class="btn btn-default check_out" href="{{ URL::to('/login-checkout') }}">Thanh toán</a>
-                    
+                    <div class="buttons">
+                        <a class="btn btn-default check_out" href="{{ URL::to('/checkout') }}">Thanh toán</a>
+                        <a class="btn btn-default check_out" href="{{ URL::to('/login-checkout') }}">Thanh toán</a>
+                        @if(Session::get('cart') == true)
+                        <a class="btn btn-default check_out" href="{{ URL::to('/delete-all-product-cart') }}">Xoá tất
+                            cả</a>
+                        @endif
+                    </div>
+
                 </div>
             </div>
         </div>

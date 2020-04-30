@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use Cart;
+use App\Rules\Captcha; 
+use Validator;
 use Illuminate\Support\Facades\Redirect;
 
 class CheckoutController extends Controller
@@ -21,6 +23,14 @@ class CheckoutController extends Controller
         ->with('brand_product',$brand_product);
     }
     public function add_customer(Request $request){
+        $check_validate = $request->validate([
+            'customer_name' => 'required',
+            'customer_email' => 'required',
+            'customer_password' => 'required',
+            'customer_phone' => 'required',
+           'g-recaptcha-response' => new Captcha(), 		//dòng kiểm tra Captcha
+        ]);
+
         $data = array();
         $data =[
             'customer_name' => $request->input('customer_name'),
@@ -45,6 +55,7 @@ class CheckoutController extends Controller
         ->with('brand_product',$brand_product);
     }
     public function save_checkout_customer(Request $request){
+    
         $data = array();
         $data =[
             'shipping_name' => $request->input('shipping_name'),

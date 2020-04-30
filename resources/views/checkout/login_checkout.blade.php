@@ -31,6 +31,14 @@
                         <input type="password" name="customer_password" placeholder="Mật khẩu"/>
                         <input type="number" name="customer_phone" placeholder="Số điện thoại"/>
                         <button type="submit" class="btn btn-default">Đăng ký</button>
+                        <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
+                        <br/>
+                        @if($errors->has('g-recaptcha-response'))
+                        <span class="invalid-feedback" style="display:block">
+                            <strong>{{$errors->first('g-recaptcha-response')}}</strong>
+                        </span>
+                        @endif
+
                     </form>
                 </div><!--/sign up form-->
             </div>

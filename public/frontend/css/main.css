@@ -1754,7 +1754,7 @@ textarea {
 }
 
 .check_out {
-    margin-left: 20px
+    margin-left: 29px
 }
 
 
@@ -2455,4 +2455,7 @@ img.girl.img-responsive {
 }
 .btn .btn-default .btn-sm{
     background: #FE980F;
+}
+input.form-control.code-coupon {
+    margin-left: 10px;
 }

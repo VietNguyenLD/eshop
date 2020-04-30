@@ -95,7 +95,14 @@
                                     $shipping_id = Session::get('shipping_id');
                                     if($customer_id != NULL && $shipping_id!= NULL){
                                 ?>
+                                
                                 <li><a href="{{ URL::to('/payment') }}"><i
+                                            class="fa fa-crosshairs"></i> Thanh toán</a></li>
+
+                                <?php 
+                                    }elseif ($customer_id != NULL ) {
+                                ?>        
+                                        <li><a href="{{ URL::to('/checkout') }}"><i
                                             class="fa fa-crosshairs"></i> Thanh toán</a></li>
                                 <?php
                                     }else{
@@ -103,10 +110,10 @@
                                 <li><a href="{{ URL::to('/login-checkout') }}"><i
                                             class="fa fa-crosshairs"></i> Thanh toán</a></li>
                                 <?php } ?>
-                                {{-- <li><a href="{{ URL::to('/show-cart') }}"><i
-                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li> --}}
-                                <li><a href="{{ URL::to('/gio-hang') }}"><i
+                                <li><a href="{{ URL::to('/show-cart') }}"><i
                                             class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                                {{-- <li><a href="{{ URL::to('/gio-hang') }}"><i
+                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li> --}}
                                 <?php
                                     $customer_id = Session::get('customer_id');
                                     if($customer_id){
@@ -119,6 +126,8 @@
                                 <li><a href="{{ URL::to('/login-checkout') }}"><i
                                             class="fa fa-lock"></i> Đăng nhập</a></li>
                                 <?php } ?>
+                                <li><a href="{{ URL::to('/gio-hang') }}"><i class="fa fa-shopping-cart">
+                                </i>Giỏ hàng Ajax</a></li>
                             </ul>
                         </div>
                     </div>
@@ -338,7 +347,7 @@
                         cart_product_price:cart_product_price,
                         cart_product_qty:cart_product_qty,
                         _token:_token},
-                    success:function(){
+                    success:function(data){
                         swal({
                                 title: "Đã thêm sản phẩm vào giỏ hàng",
                                 text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
