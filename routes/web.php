@@ -105,3 +105,8 @@ Route::get('/all-coupon','CouponController@all_coupon');
 Route::get('/delete-coupon/{coupon_id}','CouponController@delete_coupon');
 
 Route::post('/save-coupon', 'CouponController@save_coupon');
+
+///Delivery
+Route::get('/delivery','DeliveryController@delivery');
+Route::post('/select-delivery','DeliveryController@select_delivery');
+Route::post('/insert-delivery','DeliveryController@insert_delivery');

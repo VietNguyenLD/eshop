@@ -36,9 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="{{ asset('backend/css/font.css') }}" type="text/css" />
     <link href="{{ asset('backend/css/font-awesome.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('backend/css/morris.css') }}" type="text/css" />
-    <!-- calendar -->
-    <link rel="stylesheet" href="css/monthly.css">
-    <!-- //calendar -->
+   
     <!-- //font-awesome icons -->
     <script src="{{ asset('backend/js/jquery2.0.3.min.js') }}"></script>
     <script src="{{ asset('backend/js/raphael-min.js') }}"></script>
@@ -155,6 +153,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li><a href="{{URL::to('/all-coupon')}}">Liệt kê mã giảm giá</a></li>
                             </ul>
                         </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-book"></i>
+                                <span>Vận chuyển</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="{{URL::to('/delivery')}}">Quản lý vận chuyển</a></li>
+                                
+                            </ul>
+                        </li>
 
                     </ul>   
                 </div>
@@ -185,7 +193,56 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
     <script src="{{ asset('backend/js/jquery.scrollTo.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.add_delivery').click(function(){
+                let city = $('.city').val();
+                let province = $('.province').val();
+                let wards = $('.wards').val();
+                let fee_ship = $('.fee-ship').val();
+                let _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{url('/insert-delivery')}}',
+                    method: 'POST',
+                    data:{
+                        city: city,
+                        province: province,
+                        wards: wards,
+                        fee_ship: fee_ship,
+                        _token:_token},
+                    success:function(data){
+                          alert('them phi van chuyen thanh cong');
+                    }
+
+                });
+               
+            });
+            $('.choose').on('change',function(){
+                var action = $(this).attr('id');
+                var matp = $(this).val();
+                var _token = $('input[name="_token"]').val();
+                var result = '';
+                
+                if(action == 'city'){
+                    result = 'province';
+                }else{
+                    result = 'wards';
+                }
+                $.ajax({
+                    url: '{{url('/select-delivery')}}',
+                    method: 'POST',
+                    data:{
+                        action: action,
+                        matp: matp,
+                        _token:_token},
+                    success:function(data){
+                        $('#'+result).html(data);   
+                    }
+
+                });
+            });
+        });
+    </script>
     <script type="text/javascript">
         $.validate({
 
@@ -299,37 +356,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     </script>
     <!-- calendar -->
-    <script type="text/javascript" src="js/monthly.js"></script>
-    <script type="text/javascript">
-        $(window).load(function () {
-
-            $('#mycalendar').monthly({
-                mode: 'event',
-
-            });
-
-            $('#mycalendar2').monthly({
-                mode: 'picker',
-                target: '#mytarget',
-                setWidth: '250px',
-                startHidden: true,
-                showTrigger: '#mytarget',
-                stylePast: true,
-                disablePast: true
-            });
-
-            switch (window.location.protocol) {
-                case 'http:':
-                case 'https:':
-                    // running on a server, should be good.
-                    break;
-                case 'file:':
-                    alert('Just a heads-up, events will not work when run locally.');
-            }
-
-        });
-
-    </script>
+    
     <!-- //calendar -->
 </body>
 

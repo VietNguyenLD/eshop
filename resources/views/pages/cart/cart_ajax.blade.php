@@ -133,7 +133,7 @@
                         @endif
                        
                     </ul>
-                    <form action="{{url('/remove-coupon')}}" method="POST">
+                    <form action="{{url('/check-coupon')}}" method="POST">
                         @csrf
                         <input type="text" class="form-control code-coupon" name="coupon" placeholder="Nhập mã giảm giá">
                         <input type="submit" class="btn btn-default check_out" name="check_coupon" value="Tính mã giảm giá"> 
