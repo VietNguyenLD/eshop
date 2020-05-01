@@ -116,7 +116,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                                <i class="fa fa-book"></i>
+                                <i class="fa fa-leaf"></i>
                                 <span>Thương hiệu sản phẩm</span>
                             </a>
                             <ul class="sub">
@@ -126,7 +126,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                                <i class="fa fa-book"></i>
+                                <i class="fa fa-glass"></i>
                                 <span>Sản phẩm</span>
                             </a>
                             <ul class="sub">
@@ -136,7 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                                <i class="fa fa-book"></i>
+                                <i class="fa fa-folder"></i>
                                 <span>Đơn đặt hàng</span>
                             </a>
                             <ul class="sub">
@@ -145,7 +145,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                                <i class="fa fa-book"></i>
+                                <i class="fa fa-money"></i>
                                 <span>Mã giảm giá</span>
                             </a>
                             <ul class="sub">
@@ -155,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
-                                <i class="fa fa-book"></i>
+                                <i class="fa fa-bus"></i>
                                 <span>Vận chuyển</span>
                             </a>
                             <ul class="sub">
@@ -195,6 +195,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+            fetch_delivery();
+            function fetch_delivery(){
+                let _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{url('/select-feeship')}}',
+                    method: 'POST',
+                    data:{
+                        _token:_token},
+                    success:function(data){
+                        $('#load_feeship').html(data);
+                    }
+
+                });
+            }
+            $(document).on('blur','.fee_feeship_edit',function(){
+                let feeship_id = $(this).data('feeship_id');
+                let fee_value = $(this).text();
+                let _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{url('/update-delivery')}}',
+                    method: 'POST',
+                    data:{
+                        feeship_id: feeship_id,
+                        fee_value: fee_value,
+                        _token: _token
+                        },
+                    success:function(data){
+                        fetch_delivery();
+                    }
+
+                });
+                
+            });
+
             $('.add_delivery').click(function(){
                 let city = $('.city').val();
                 let province = $('.province').val();
@@ -211,7 +245,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         fee_ship: fee_ship,
                         _token:_token},
                     success:function(data){
-                          alert('them phi van chuyen thanh cong');
+                        fetch_delivery();
                     }
 
                 });
