@@ -98,3 +98,10 @@ Route::get('/view-order/{order_id}','OrderManagerController@view_order');
 //login Facebook
 Route::get('/login-facebook','AdminController@login_facebook');
 Route::get('/admin/callback','AdminController@callback_facebook');
+ 
+//COUPON///
+Route::get('/add-coupon','CouponController@add_coupon');
+Route::get('/all-coupon','CouponController@all_coupon');
+Route::get('/delete-coupon/{coupon_id}','CouponController@delete_coupon');
+
+Route::post('/save-coupon', 'CouponController@save_coupon');

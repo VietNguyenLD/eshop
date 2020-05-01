@@ -69,7 +69,7 @@ class AdminController extends Controller
         $data = $request->validate([
             'admin_email' => 'required',
             'admin_password' => 'required',
-            'g-recaptcha-response' => new Captcha(),
+            // 'g-recaptcha-response' => new Captcha(),
         ]);
 
         $admin_email = $request->input('admin_email');

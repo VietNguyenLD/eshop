@@ -35,7 +35,7 @@
                         @php
                         $subtotal = $value['product_price'] * $value['product_qty'];
                         $total+=$subtotal;
-                        $tax = 0.08*$total;
+                        $tax = 0.02*$total;
                         @endphp
                         <tr>
                             <td class="cart_product">
@@ -99,7 +99,41 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="total_area">
-                    <form action="{{url('/check-coupon')}}" method="POST">
+                    <ul>
+                        @if(Session::get('cart'))
+                        @if(Session::get('coupon'))
+                        @foreach ( Session::get('coupon') as $key => $val )
+                            @if($val['coupon_condition'] == 1)
+                            @php
+                            $money_coupon = $subtotal*$val['coupon_money']/100;
+                            $total = $subtotal+$tax-$money_coupon;
+                            @endphp
+                            <li>Mã giảm
+                                <span>{{$val['coupon_money'].' %'}}</span>
+                            </li>
+                            <li>Tổng giảm
+                               
+                                <span>{{number_format($money_coupon,0,',','.'). ' VNĐ'}}</span>
+                            </li>
+                            @else
+                            @php
+                            $money_coupon = $val['coupon_money'];
+                            $total = $subtotal+$tax-$money_coupon;
+                            @endphp
+                            <li>Mã giảm
+                                <span>{{number_format($val['coupon_money'],0,',','.'). ' VNĐ'}}</span>
+                            </li>
+                            <li>Tổng giảm
+                                 <span>{{number_format($val['coupon_money'],0,',','.'). ' VNĐ'}}</span>
+                            </li>
+
+                            @endif
+                        @endforeach
+                        @endif
+                        @endif
+                       
+                    </ul>
+                    <form action="{{url('/remove-coupon')}}" method="POST">
                         @csrf
                         <input type="text" class="form-control code-coupon" name="coupon" placeholder="Nhập mã giảm giá">
                         <input type="submit" class="btn btn-default check_out" name="check_coupon" value="Tính mã giảm giá"> 
@@ -110,19 +144,34 @@
             <div class="col-sm-6">
                 <div class="total_area">
                     <ul>
+                        @if(Session::get('cart'))
                         <li>Tổng
-                            <span>{{number_format($total,0,',','.').' VNĐ'}}</span>
+                            <span>{{number_format($subtotal,0,',','.').' VNĐ'}}</span>
                         </li>
                         <li>Thuế
                             <span>{{number_format($tax,0,',','.').' VNĐ'}}</span>
                         </li>
                         <li>Phí vận chuyển <span>Free</span></li>
                         <li>Tiền sau giảm
-                            <span></span>
+                            <span>{{number_format($total,0,',','.').' VNĐ'}}</span>
                         </li>
+                        @else
+                        <li>Tổng
+                            <span>{{number_format(0,0,',','.').' VNĐ'}}</span>
+                        </li>
+                        <li>Thuế
+                            <span>{{number_format(0,0,',','.').' VNĐ'}}</span>
+                        </li>
+                        <li>Phí vận chuyển <span>Free</span></li>
+                        <li>Tiền sau giảm
+                            <span>{{number_format(0,0,',','.').' VNĐ'}}</span>
+                        </li>
+                        @endif
                     </ul>
-                    <div class="buttons">
+                    <div class="buttons d-flex justify-content-center">
+                        @if(Session::get('customer_id'))
                         <a class="btn btn-default check_out" href="{{ URL::to('/checkout') }}">Thanh toán</a>
+                        @endif
                         <a class="btn btn-default check_out" href="{{ URL::to('/login-checkout') }}">Thanh toán</a>
                         @if(Session::get('cart') == true)
                         <a class="btn btn-default check_out" href="{{ URL::to('/delete-all-product-cart') }}">Xoá tất

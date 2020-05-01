@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Cart;
+use App\Models\CouponModel;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
@@ -14,7 +15,32 @@ class CartController extends Controller
 {   
     public function check_coupon(Request $request){
         $data = $request->all();
-        print_r($data);
+        $coupon = CouponModel::where('coupon_code', $data['coupon'])->first();
+        if($coupon){
+            $count_coupon = $coupon->count();
+            if($count_coupon > 0){
+                $coupon_session = Session::get('coupon');
+                if($coupon_session == true){
+                    $cou [] = array(
+                        'coupon_code' => $coupon->coupon_code,
+                        'coupon_condition' => $coupon->coupon_condition,
+                        'coupon_money' => $coupon->coupon_money,
+                    );
+                    Session::put('coupon',$cou);
+                }else {
+                    $cou [] = array(
+                        'coupon_code' => $coupon->coupon_code,
+                        'coupon_condition' => $coupon->coupon_condition,
+                        'coupon_money' => $coupon->coupon_money,
+                    );
+                    Session::put('coupon',$cou);
+                }
+                Session::save();
+                return redirect()->back()->with('success','Thêm mã giảm giá thành công');
+            }
+        }else{
+            return redirect()->back()->with('error','Mã giảm giá không đúng');
+        }
     }
     public function update_cart(Request $request){
         $data = $request->all();
@@ -100,6 +126,7 @@ class CartController extends Controller
         $cart = Session::get('cart');
         if($cart == true){
             Session::forget('cart');
+            Session::forget('coupon');
             return redirect()->back()->with('warning','Xoá tất giỏ hàng thành công');
         }
     }

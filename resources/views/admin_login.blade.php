@@ -56,7 +56,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			@endif
 				
 		</form>
-		<a href="{{URl::to('/login-facebook')}}">Đăng nhập bằng Facebook</a>
+		{{-- <a href="{{URl::to('/login-facebook')}}">Đăng nhập bằng Facebook</a> --}}
 </div>
 </div>
 <script src="{{ asset('backend/js/bootstrap.js')}}"></script>
