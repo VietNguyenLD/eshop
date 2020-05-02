@@ -112,23 +112,24 @@ class CheckoutController extends Controller
             'customer_id' => Session::get('customer_id'),
             'shipping_id' => Session::get('shipping_id'),
             'payment_id' => $insert_payment_id,
-            'order_total' => Cart::total(),
+            'order_total' => $request->input('toltal'),
             'order_status' => 'Đang chờ xử lý',
         ];    
         $insert_order_id = DB::table('tbl_order')->insertGetId($data_order);
         // insert order detail
         $data_order_details = array();
-        $content = Cart::content();
-        foreach ($content as $v_content){
+        foreach(Session::get('cart') as $key => $value ){
             $data_order_details =[
                 'order_id' => $insert_order_id,
-                'product_id' => $v_content->id,
-                'product_name' => $v_content->name,
-                'product_price' => $v_content->price,
-                'product_sales_quantity' => $v_content->qty,
+                'product_id' => $value['product_id'],
+                'product_name' => $value['product_name'],
+                'product_price' => $value['product_price'],
+                'product_sales_quantity' => $value['product_qty'],
             ];
+            $insert_order_details = DB::table('tbl_order_details')->insert($data_order_details);
         }
-        $insert_order_details = DB::table('tbl_order_details')->insert($data_order_details);
+       
+        
         
         if($data_payment['payment_method'] == 1){
             echo 'Thanh toan bang the ATM';
@@ -138,7 +139,7 @@ class CheckoutController extends Controller
     
             $brand_product = DB::table('tbl_brand_product')->where('brand_status','1')
             ->orderby('brand_id','desc')->get();
-            Cart::destroy();
+            Session::forget('cart');
             return view('checkout.handcash')->with('category_product',$category_product)
             ->with('brand_product',$brand_product);
         }else{

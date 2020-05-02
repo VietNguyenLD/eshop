@@ -21,7 +21,7 @@ class HomeController extends Controller
         $brand_product = DB::table('tbl_brand_product')->where('brand_status','1')
         ->orderby('brand_id','desc')->get();
         $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')
-        ->limit(6)->get();
+        ->limit(3)->get();
         foreach($all_product as $value){
             $product_id[] = $value->product_id;
         }
