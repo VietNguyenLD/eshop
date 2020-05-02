@@ -140,6 +140,7 @@ class CheckoutController extends Controller
             $brand_product = DB::table('tbl_brand_product')->where('brand_status','1')
             ->orderby('brand_id','desc')->get();
             Session::forget('cart');
+            Session::forget('coupon');
             return view('checkout.handcash')->with('category_product',$category_product)
             ->with('brand_product',$brand_product);
         }else{

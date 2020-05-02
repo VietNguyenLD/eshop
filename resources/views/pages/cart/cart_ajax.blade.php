@@ -169,10 +169,14 @@
                         @endif
                     </ul>
                     <div class="buttons d-flex justify-content-center">
-                        @if(Session::get('customer_id'))
+                        @if(Session::get('customer_id') && Session::get('shipping_id')==false)
                         <a class="btn btn-default check_out" href="{{ URL::to('/checkout') }}">Thanh toán</a>
-                        @endif
+                        @elseif(Session::get('customer_id') && Session::get('shipping_id')==true)
+                        <a class="btn btn-default check_out" href="{{ URL::to('/payment') }}">Thanh toán</a>
+                        @else
                         <a class="btn btn-default check_out" href="{{ URL::to('/login-checkout') }}">Thanh toán</a>
+                        @endif
+                        
                         @if(Session::get('cart') == true)
                         <a class="btn btn-default check_out" href="{{ URL::to('/delete-all-product-cart') }}">Xoá tất
                             cả</a>

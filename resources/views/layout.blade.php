@@ -110,10 +110,10 @@
                                 <li><a href="{{ URL::to('/login-checkout') }}"><i
                                             class="fa fa-crosshairs"></i> Thanh toán</a></li>
                                 <?php } ?>
-                                <li><a href="{{ URL::to('/show-cart') }}"><i
-                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-                                {{-- <li><a href="{{ URL::to('/gio-hang') }}"><i
+                                {{-- <li><a href="{{ URL::to('/show-cart') }}"><i
                                             class="fa fa-shopping-cart"></i> Giỏ hàng</a></li> --}}
+                                <li><a href="{{ URL::to('/gio-hang') }}"><i
+                                            class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                                 <?php
                                     $customer_id = Session::get('customer_id');
                                     if($customer_id){
@@ -126,8 +126,8 @@
                                 <li><a href="{{ URL::to('/login-checkout') }}"><i
                                             class="fa fa-lock"></i> Đăng nhập</a></li>
                                 <?php } ?>
-                                <li><a href="{{ URL::to('/gio-hang') }}"><i class="fa fa-shopping-cart">
-                                </i>Giỏ hàng Ajax</a></li>
+                                {{-- <li><a href="{{ URL::to('/gio-hang') }}"><i class="fa fa-shopping-cart">
+                                </i>Giỏ hàng Ajax</a></li> --}}
                             </ul>
                         </div>
                     </div>

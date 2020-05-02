@@ -24,9 +24,7 @@ class OrderManagerController extends Controller
         ->join('tbl_order_details','tbl_order_details.order_id','tbl_order.order_id')
         ->select('tbl_order.*','tbl_customers.*','tbl_order_details.*','tbl_shipping.*')->get();
 
-        // echo '<pre>';
-        // print_r ($order_by_id);
-        // echo '</pre>';
+        
         $manager_order_by_id = view('admin.view_order')->with('order_by_id',$order_by_id);
         return view('admin_layout')->with('admin.view_order',$manager_order_by_id);
     }

@@ -1,6 +1,6 @@
 @extends('admin_layout')
 @section('admin_content')
-@foreach ($order_by_id as $order)
+
     
 
 <div class="table-agile-info">
@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($order_by_id as $order)
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                         </td>
@@ -33,6 +33,7 @@
                         <td>{{$order->customer_phone}}</td>
                         
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -70,7 +71,7 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($order_by_id as $order)
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                         </td>
@@ -80,6 +81,7 @@
                     
                         
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -97,7 +99,7 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Thông tin người mua
+            Thông tin Sản phẩm
         </div>
         <div class="table-responsive">
             @include('flash-message')
@@ -117,15 +119,16 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($order_by_id as $order)
                     <tr>
                         <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                         </td>
                         <td>{{$order->product_name}}</td>
                         <td>{{$order->product_sales_quantity}}</td>
-                        <td>{{$order->product_price}}</td>
-                        <td>{{$order->order_total}}</td>
+                        <td>{{number_format($order->product_price,0,',','.').' VNĐ'}}</td>
+                        <td>{{number_format($order->order_total,0,',','.').' VNĐ'}}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -140,5 +143,5 @@
         </footer>
     </div>
 </div>
-@endforeach
+
 @endsection

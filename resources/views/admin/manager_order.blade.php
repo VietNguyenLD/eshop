@@ -17,14 +17,14 @@
             </div>
             <div class="col-sm-4">
             </div>
-            <div class="col-sm-3">
+            {{-- <div class="col-sm-3">
                 <div class="input-group">
                     <input type="text" class="input-sm form-control" placeholder="Search">
                     <span class="input-group-btn">
                         <button class="btn btn-sm btn-default" type="button">Go!</button>
                     </span>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="table-responsive">
             @include('flash-message')
@@ -49,7 +49,7 @@
                             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                             </td>
                             <td>{{ $order->customer_name }}</td>
-                            <td>{{ $order->order_total }}</td>
+                            <td>{{number_format($order->order_total,0,',','.'). ' VNĐ' }}</td>
                             <td>{{ $order->order_status}}</td>
                             <td><span class="text-ellipsis">{{ $order->created_at }}</span></td>
                             <td>
